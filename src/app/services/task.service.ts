@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { TASKS } from 'src/app/mock-tasks';
 import { Task } from '../models/task';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
@@ -15,5 +14,9 @@ export class TaskService {
 
   getTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(this.apiUrl);
+  }
+
+  deleteTask(task: Task): Observable<Task> {
+    return this.http.delete<Task>(`${this.apiUrl + task.id}`);
   }
 }
