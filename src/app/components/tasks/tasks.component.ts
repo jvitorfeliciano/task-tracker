@@ -8,8 +8,8 @@ import { TaskService } from 'src/app/services/task.service';
   styleUrls: ['./tasks.component.css'],
 })
 export class TasksComponent implements OnInit {
-  count = 0;
   tasks: Task[] = [];
+  
 
   constructor(private service: TaskService) {}
 
@@ -21,6 +21,7 @@ export class TasksComponent implements OnInit {
     this.service.getTasks().subscribe({
       next: (res) => {
         this.tasks = res;
+        console.log(this.tasks)
       },
       error: (err) => console.log(err),
     });
@@ -37,6 +38,13 @@ export class TasksComponent implements OnInit {
     task.reminder = !task.reminder;
     this.service.updateTaskReminder(task).subscribe({
       next: (res) => console.log(res),
+      error: (err) => console.log(err),
+    });
+  }
+
+  addTask(task: Task) {
+    this.service.addTask(task).subscribe({
+      next: () => this.getTasks(),
       error: (err) => console.log(err),
     });
   }

@@ -8,18 +8,18 @@ import { Task } from 'src/app/models/task';
   styleUrls: ['./task-item.component.css'],
 })
 export class TaskItemComponent {
-  @Input() task: Task | undefined;
+  @Input() task: Task;
   @Output() onDeleteTask: EventEmitter<Task> = new EventEmitter();
   @Output() OnToggleReminder: EventEmitter<Task> = new EventEmitter();
   faTimes = faTimes;
 
   constructor() {}
 
-  onDelete(task: Task | undefined) {
+  onDelete(task: Task) {
     this.onDeleteTask.emit(task); // emit the event to the parent;
   }
 
-  onToggle(task: Task | undefined) {
+  onToggle(task: Task) {
     this.OnToggleReminder.emit(task);
   }
 }

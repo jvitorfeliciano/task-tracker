@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../models/task';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { Observable } from 'rxjs';
-
 
 @Injectable({
   providedIn: 'root',
@@ -23,5 +22,9 @@ export class TaskService {
 
   updateTaskReminder(task: Task): Observable<Task> {
     return this.http.put<Task>(`${this.apiUrl + task.id}`, task);
+  }
+
+  addTask(task: Task): Observable<Task> {
+    return this.http.post<Task>(this.apiUrl, task);
   }
 }
